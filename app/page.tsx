@@ -1,30 +1,17 @@
 import Navbar from "@/components/Navbar";
 import CourierTicker from "@/components/CourierTicker";
+import DeliveryMap from "@/components/DeliveryMap";
+import ShipSteps from "@/components/ShipSteps";
+import Testimonials from "@/components/Testimonials";
+import TrackingCTA from "@/components/TrackingCTA";
+import Footer from "@/components/Footer";
 import dynamic from "next/dynamic";
 
+// ScrollFilm uses GSAP ScrollTrigger pinning which requires the browser DOM.
+// It cannot run during SSR — use dynamic import with ssr:false + a dark placeholder.
 const ScrollFilm = dynamic(() => import("@/components/ScrollFilm"), {
   ssr: false,
   loading: () => <div style={{ minHeight: "100dvh", background: "#1c1813" }} />,
-});
-
-const DeliveryMap = dynamic(() => import("@/components/DeliveryMap"), {
-  ssr: false,
-});
-
-const ShipSteps = dynamic(() => import("@/components/ShipSteps"), {
-  ssr: false,
-});
-
-const Testimonials = dynamic(() => import("@/components/Testimonials"), {
-  ssr: false,
-});
-
-const TrackingCTA = dynamic(() => import("@/components/TrackingCTA"), {
-  ssr: false,
-});
-
-const Footer = dynamic(() => import("@/components/Footer"), {
-  ssr: false,
 });
 
 export default function Page() {
