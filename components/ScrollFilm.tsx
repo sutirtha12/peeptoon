@@ -236,8 +236,11 @@ export default function ScrollFilm() {
     };
     video.addEventListener("error", onError);
     const failTimer = window.setTimeout(() => {
-      if (durationRef.current <= 0) onError();
-    }, 6000);
+      if (durationRef.current <= 0) {
+        console.warn("ScrollFilm: Video metadata loading timed out. Falling back to static mode.");
+        onError();
+      }
+    }, 25000);
     const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 80);
 
     return () => {
@@ -270,7 +273,7 @@ export default function ScrollFilm() {
           className="sf-stage"
           style={reduced ? { height: "auto", overflow: "visible", position: "relative" } : undefined}
         >
-          <video ref={videoRef} className="sf-video" muted playsInline preload="auto">
+          <video ref={videoRef} className="sf-video" muted playsInline preload="metadata">
             <source src="/truck-scroll.mp4" type="video/mp4" />
           </video>
 
